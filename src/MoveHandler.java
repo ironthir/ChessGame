@@ -1,3 +1,5 @@
+import Enums.FigureType;
+
 public class MoveHandler {
     private ChessBoard localChessboard;
     private final int INDEX_OF_FINAL_FIELD = 7;

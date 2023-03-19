@@ -1,3 +1,4 @@
+import Enums.FigureType;
 public class Figure {
     final private int INDEX_OF_FINAL_FIELD = 7;
     public int positionX;
@@ -9,6 +10,12 @@ public class Figure {
         this.positionY = pos.vertical;
         this.typeOfFigure = type;
         this.owner = owner;
+    }
+    Figure(Coordinates pos, FigureType type){
+        this.positionX = pos.horizontal;
+        this.positionY = pos.vertical;
+        this.typeOfFigure = type;
+
     }
 
 
