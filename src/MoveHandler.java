@@ -1,32 +1,56 @@
-import Enums.FigureType;
+import Enums.InvalidPlaceEnum;
+import Enums.MoveResult;
+import Exceptions.InvalidPlaceException;
+import Figures.Figure;
+import Utilities.Coordinates;
+import Chess.Tile;
 
 public class MoveHandler {
-    private ChessBoard localChessboard;
+
+    private ChessBoard board;
+    private CheckHandler checkHandler;
     private final int INDEX_OF_FINAL_FIELD = 7;
-    MoveHandler(ChessBoard board){
-        this.localChessboard = board;
+    private Figure currentFigure = null;
+    private Coordinates destination;
+    MoveHandler(ChessBoard board, CheckHandler checkHandler){
+        this.board = board;
+        this.checkHandler = checkHandler;
 
     }
 
-    public void MakeAMove(Coordinates start, Coordinates end, Figure figure){
-        if(!IsTheMoveInsideBounds(start, end, figure.typeOfFigure)) return;
+    public boolean ValidateSelectedFigure(Coordinates start, String currentPlayer) throws InvalidPlaceException {
+
+
+        final Figure figureAtLocation = board.GetFigureAtPosition(start);
+
+        if(figureAtLocation == null) throw new InvalidPlaceException(InvalidPlaceEnum.EmptyPlace);
+
+        if(!figureAtLocation.owner.equals(currentPlayer)) throw new InvalidPlaceException(InvalidPlaceEnum.EnemyFigureInPlace);
+
+        this.currentFigure = figureAtLocation;
+        return true;
 
     }
-    public boolean IsTheMoveInsideBounds(Coordinates start, Coordinates end,  FigureType type){
-        switch (type){
-            case Pawn:
-                final int diff = end.horizontal - start.horizontal;
-                final boolean directionLeft = diff < 0;
 
-                if((directionLeft && start.horizontal - (-diff) < 0) || (!directionLeft &&   start.horizontal + (-diff) >INDEX_OF_FINAL_FIELD  )){
-                    return false;
-                }
+    public boolean ValidateSelectedDestination(Coordinates pos, boolean inCheck) throws InvalidPlaceException
+    {
 
+        final Figure figureAtLocation = board.GetFigureAtPosition(pos);
+        if(figureAtLocation != null && figureAtLocation.owner.equals(currentFigure.owner)) throw new InvalidPlaceException(InvalidPlaceEnum.AllyFigureInPlace);
 
-            default:
-                throw new Error("Unspecified type of figure");
+        if(!IsTheMoveLegal(pos)) throw new InvalidPlaceException(InvalidPlaceEnum.OutsideRangeOfFigure);
 
-        }
+        this.destination = pos;
+        return true;
+    }
+
+    public MoveResult MakeAMove(){
+        board.UpdateChessMatrix(currentFigure, destination);
+        return MoveResult.Moved;
+    }
+    public boolean IsTheMoveLegal(Coordinates end){
+        final Tile endTile = board.GetTileAtPosition(end);
+       return currentFigure.ValidateFigureMovement(endTile);
     }
 
 }

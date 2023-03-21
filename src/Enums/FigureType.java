@@ -7,10 +7,5 @@ public enum FigureType {
     King,
     Queen,
     Pawn,
-    None
-
-
-
-
-
+    None,
 }
