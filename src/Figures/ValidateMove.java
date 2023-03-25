@@ -1,7 +1,8 @@
 package Figures;
 
-import Chess.Tile;
+import Board.*;
 
 public interface ValidateMove {
-    public boolean ValidateFigureMovement(Tile endTile);
+     boolean ValidateFigureMovement(Tile endTile, ChessBoard board);
+
 }

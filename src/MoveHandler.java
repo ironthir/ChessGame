@@ -1,9 +1,10 @@
+import Board.ChessBoard;
 import Enums.InvalidPlaceEnum;
 import Enums.MoveResult;
 import Exceptions.InvalidPlaceException;
 import Figures.Figure;
 import Utilities.Coordinates;
-import Chess.Tile;
+import Board.Tile;
 
 public class MoveHandler {
 
@@ -50,7 +51,7 @@ public class MoveHandler {
     }
     public boolean IsTheMoveLegal(Coordinates end){
         final Tile endTile = board.GetTileAtPosition(end);
-       return currentFigure.ValidateFigureMovement(endTile);
+       return currentFigure.ValidateFigureMovement(endTile, this.board);
     }
 
 }

@@ -1,13 +1,14 @@
+package Board;
+
 import Enums.MoveResult;
 import Figures.*;
 import Utilities.Coordinates;
-import Chess.Tile;
 
 public class ChessBoard {
 
     public Tile[][] chessMatrix = new Tile[8][8];
     public String playerOne, playerTwo;
-    ChessBoard(String playerOne, String playerTwo){
+    public ChessBoard(String playerOne, String playerTwo){
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         this.InitializeChessBoard();

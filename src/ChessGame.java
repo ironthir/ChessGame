@@ -1,3 +1,4 @@
+import Board.ChessBoard;
 import Enums.MoveResult;
 
 public class ChessGame {

@@ -1,6 +1,8 @@
 package Figures;
 
 
+import Board.ChessBoard;
+import Board.Tile;
 import Utilities.Coordinates;
 
 public class King extends Figure {
@@ -9,7 +11,7 @@ public class King extends Figure {
     {
         super(pos, owner);
     }
-    public boolean ValidateFigureMovement(Chess.Tile endTile)
+    public boolean ValidateFigureMovement(Tile endTile, ChessBoard board)
     {
         return true;
     }

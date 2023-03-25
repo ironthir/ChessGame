@@ -1,4 +1,5 @@
 
+import Board.ChessBoard;
 import Enums.MoveResult;
 import Exceptions.InvalidPlaceException;
 import Utilities.Coordinates;
