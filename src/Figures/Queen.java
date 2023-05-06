@@ -12,7 +12,7 @@ public class Queen extends Figure {
     }
     public boolean ValidateFigureMovement(Tile endTile, ChessBoard board)
     {
-        return true;
+        return Rook.ValidateRookMovement(endTile, board, this) || King.ValidateKingMovement(endTile, board, this) || Bishop.ValidateBishopMovement(endTile, board, this);
     }
 
 }
