@@ -10,7 +10,6 @@ public class MoveHandler {
 
     private ChessBoard board;
     private CheckHandler checkHandler;
-    private final int INDEX_OF_FINAL_FIELD = 7;
     private Figure currentFigure = null;
     private Coordinates destination;
     MoveHandler(ChessBoard board, CheckHandler checkHandler){
@@ -46,8 +45,8 @@ public class MoveHandler {
     }
 
     public MoveResult MakeAMove(){
-        board.UpdateChessMatrix(currentFigure, destination);
-        return MoveResult.Moved;
+       return board.UpdateChessMatrix(currentFigure, destination);
+
     }
     public boolean IsTheMoveLegal(Coordinates end){
         final Tile endTile = board.GetTileAtPosition(end);

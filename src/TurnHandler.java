@@ -27,12 +27,12 @@ public class TurnHandler {
 
 
 
-private Coordinates GetTheUserToSelectCorrectFigure(){
+private void GetTheUserToSelectCorrectFigure(){
     String startPlace;
     Coordinates startPlaceComputer = null;
 
     Scanner keyboard = new Scanner(System.in);
-    System.out.print("It's " +currentPlayer+"'s turn. \n Which figure would you like to move? \n");
+    System.out.print("Which figure would you like to move? \n");
     boolean isValid = false;
     while(!isValid){
         try{
@@ -45,9 +45,9 @@ private Coordinates GetTheUserToSelectCorrectFigure(){
         }
 
     }
-    return startPlaceComputer;
+
 }
-    private Coordinates GetTheUserToSelectCorrectDestination()
+    private boolean GetTheUserToSelectCorrectDestination()
     {
         String desiredPlace;
         Coordinates desiredPlaceComputer = null;
@@ -58,22 +58,35 @@ private Coordinates GetTheUserToSelectCorrectFigure(){
         while(!isValid){
             try{
                 desiredPlace = keyboard.nextLine();
+                if(desiredPlace.equalsIgnoreCase("cancel")) {
+                    System.out.println(desiredPlace);
+                return true;
+                }
                 desiredPlaceComputer =  Coordinates.ConvertHumanToComputer(desiredPlace);
                 isValid = moveHandler.ValidateSelectedDestination(desiredPlaceComputer, checkHandler.IsCurrentPlayerChecked(this.currentPlayer));
             }catch(InvalidPlaceException e)  {
                 System.out.println(e.message);
             }
         }
-        return desiredPlaceComputer;
+        return false;
+
     }
 
 
 
 
     public MoveResult ProcessUserTurn(){
-        Coordinates start, end;
-        start = GetTheUserToSelectCorrectFigure();
-        end = GetTheUserToSelectCorrectDestination();
+        if(this.currentPlayer == playerOne)
+            this.currentPlayer = playerTwo;
+        else
+            this.currentPlayer = playerOne;
+        System.out.print("It's " +currentPlayer+"'s turn. \n");
+        boolean cancelled = false;
+        do{
+            GetTheUserToSelectCorrectFigure();
+            cancelled= GetTheUserToSelectCorrectDestination();
+        }while(cancelled);
+
         final MoveResult result = moveHandler.MakeAMove();
          board.RefreshChessboard();
          return result;

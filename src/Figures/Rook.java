@@ -13,12 +13,13 @@ public class Rook extends Figure {
 
     public static boolean ValidateRookMovement(Tile endTile, ChessBoard board, Figure fig){
         if(fig.coordinates.vertical != endTile.pos.vertical && fig.coordinates.horizontal != endTile.pos.horizontal) return false;
-        if(fig.coordinates.vertical == endTile.pos.vertical){
+        if(fig.coordinates.horizontal == endTile.pos.horizontal){
             final boolean directionUp = endTile.pos.vertical > fig.coordinates.vertical;
-            int i = fig.coordinates.vertical;
+            int i = fig.coordinates.vertical + 1;
             while(i != endTile.pos.vertical)
             {
-                if(board.GetFigureAtPosition(new Coordinates(i, fig.coordinates.horizontal)) != null) return false;
+
+                if(board.GetTileAtPosition(new Coordinates(i, fig.coordinates.horizontal)).hasFigure) return false;
 
                 if(directionUp) i++;
                 else i--;
@@ -29,7 +30,7 @@ public class Rook extends Figure {
             int i = fig.coordinates.horizontal;
             while(i != endTile.pos.horizontal)
             {
-                if(board.GetFigureAtPosition(new Coordinates(fig.coordinates.vertical, i)) != null) return false;
+                if(board.GetTileAtPosition(new Coordinates(fig.coordinates.vertical, i)).hasFigure) return false;
 
                 if(directionRight) i++;
                 else i--;
