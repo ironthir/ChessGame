@@ -1,6 +1,6 @@
 package Figures;
 import Utilities.Coordinates;
-import Enums.FigureType;
+
 public abstract class Figure implements ValidateMove {
     public Coordinates coordinates;
     public String owner;

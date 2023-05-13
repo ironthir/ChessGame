@@ -4,9 +4,12 @@ import Utilities.Coordinates;
 import Board.Tile;
 public class Pawn extends Figure {
     private int directionDown;
+
+    private final Coordinates startPos;
     public Pawn(Coordinates pos, String owner, int directionDown)
     {
         super(pos, owner);
+        this.startPos = pos;
         this.directionDown = directionDown;
     }
 

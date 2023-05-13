@@ -1,3 +1,5 @@
+package Handlers;
+
 import Board.ChessBoard;
 import Enums.InvalidPlaceEnum;
 import Enums.MoveResult;

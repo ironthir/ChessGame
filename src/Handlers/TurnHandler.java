@@ -1,3 +1,4 @@
+package Handlers;
 
 import Board.ChessBoard;
 import Enums.MoveResult;
@@ -15,7 +16,7 @@ public class TurnHandler {
     private MoveHandler moveHandler;
     private CheckHandler checkHandler;
 
-    TurnHandler(String playerOne, String playerTwo, ChessBoard board){
+    public TurnHandler(String playerOne, String playerTwo, ChessBoard board){
         this.checkHandler = new CheckHandler();
         this.moveHandler = new MoveHandler(board, this.checkHandler);
         this.playerOne = playerOne;
@@ -27,26 +28,26 @@ public class TurnHandler {
 
 
 
-private void GetTheUserToSelectCorrectFigure(){
-    String startPlace;
-    Coordinates startPlaceComputer = null;
+    private void GetTheUserToSelectCorrectFigure(){
+        String startPlace;
+        Coordinates startPlaceComputer = null;
 
-    Scanner keyboard = new Scanner(System.in);
-    System.out.print("Which figure would you like to move? \n");
-    boolean isValid = false;
-    while(!isValid){
-        try{
-            startPlace = keyboard.nextLine();
-            startPlaceComputer = Coordinates.ConvertHumanToComputer(startPlace);
-            isValid = this.moveHandler.ValidateSelectedFigure(startPlaceComputer, currentPlayer);
+        Scanner keyboard = new Scanner(System.in);
+        System.out.print("Which figure would you like to move? \n");
+        boolean isValid = false;
+        while(!isValid){
+            try{
+                startPlace = keyboard.nextLine();
+                startPlaceComputer = Coordinates.ConvertHumanToComputer(startPlace);
+                isValid = this.moveHandler.ValidateSelectedFigure(startPlaceComputer, currentPlayer);
 
-        }catch(InvalidPlaceException e)  {
-            System.out.println(e.message);
+            }catch(InvalidPlaceException e)  {
+                System.out.println(e.message);
+            }
+
         }
 
     }
-
-}
     private boolean GetTheUserToSelectCorrectDestination()
     {
         String desiredPlace;

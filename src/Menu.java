@@ -7,8 +7,7 @@ public class Menu {
        game.PrintMenu();
     }
     public void PrintMenu(){
-        //FileHelper helper = new FileHelper();
-        //helper.ReadTextFromFile("src/MediaFiles/Menu.txt");
+
         System.out.println(" <*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*><*>\n" +
                 " :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
                 "\n" +
@@ -62,14 +61,29 @@ public class Menu {
         System.out.println("Name of player one: ");
         this.playerOne =  keyboard.nextLine();
 
+        while(this.playerOne.equals("")){
+            System.out.println("Invalid name of the player: ");
+            this.playerOne =  keyboard.nextLine();
+        }
+
         System.out.println("Name of player two: ");
         this.playerTwo =  keyboard.nextLine();
-
-        while(playerOne.equals(playerTwo))
+        while(playerTwo.equals(""))
         {
-            System.out.println("Players cannot have the same name! Enter new name: ");
+            System.out.println("Invalid name of the player: ");
             this.playerTwo =  keyboard.nextLine();
         };
+
+        while(playerOne.equals(playerTwo) || playerTwo.equals(""))
+        {
+            if(playerOne.equals(playerTwo) )
+                System.out.println("Players cannot have the same name! Enter new name: ");
+            else if(playerTwo.equals(""))
+                System.out.println("Invalid name of the player: ");
+            this.playerTwo =  keyboard.nextLine();
+        };
+
+
 
     }
 

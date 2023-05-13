@@ -13,6 +13,7 @@ public class InvalidPlaceException extends Exception  {
             case NotAPlace -> this.message = "You have selected an invalid place.\n";
             case OutsideRangeOfFigure ->this.message = "Selected figure cannot be moved to the desired place.\n";
             case AllyFigureInPlace -> this.message = "There's an ally figure in your place of choice\n";
+            default -> this.message = "Value " + e.toString() + " unsupported for InvalidPlaceException";
         }
     }
 }

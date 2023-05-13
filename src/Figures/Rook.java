@@ -15,7 +15,7 @@ public class Rook extends Figure {
         if(fig.coordinates.vertical != endTile.pos.vertical && fig.coordinates.horizontal != endTile.pos.horizontal) return false;
         if(fig.coordinates.horizontal == endTile.pos.horizontal){
             final boolean directionUp = endTile.pos.vertical > fig.coordinates.vertical;
-            int i = fig.coordinates.vertical + 1;
+            int i = fig.coordinates.vertical ;
             while(i != endTile.pos.vertical)
             {
 

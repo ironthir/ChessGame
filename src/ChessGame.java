@@ -1,8 +1,9 @@
 import Board.ChessBoard;
 import Enums.MoveResult;
+import Handlers.TurnHandler;
 
 public class ChessGame {
-    public String playerOne, playerTwo;
+
     ChessBoard board;
     TurnHandler turnHandler;
     private boolean isAlive = true;
